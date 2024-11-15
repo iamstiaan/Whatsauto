@@ -1,5 +1,24 @@
 # Changelog
 
+## 4.72.1 (2024-11-15)
+
+Full Changelog: [v4.72.0...v4.72.1](https://github.com/openai/openai-node/compare/v4.72.0...v4.72.1)
+
+### Bug Fixes
+
+* **docs:** add missing await to pagination example ([#1190](https://github.com/openai/openai-node/issues/1190)) ([524b9e8](https://github.com/openai/openai-node/commit/524b9e82ae13a3b5093dcfbfd1169a798cf99ab4))
+
+
+### Chores
+
+* **client:** drop unused devDependency ([#1191](https://github.com/openai/openai-node/issues/1191)) ([8ee6c03](https://github.com/openai/openai-node/commit/8ee6c0335673f2ecf84ea11bdfc990adab607e20))
+* **internal:** use reexports not destructuring ([#1181](https://github.com/openai/openai-node/issues/1181)) ([f555dd6](https://github.com/openai/openai-node/commit/f555dd6503bc4ccd4d13f4e1a1d36fbbfd51c369))
+
+
+### Documentation
+
+* bump models in example snippets to gpt-4o ([#1184](https://github.com/openai/openai-node/issues/1184)) ([4ec4027](https://github.com/openai/openai-node/commit/4ec402790cf3cfbccbf3ef9b61d577b0118977e8))
+
 ## 4.72.0 (2024-11-12)
 
 Full Changelog: [v4.71.1...v4.72.0](https://github.com/openai/openai-node/compare/v4.71.1...v4.72.0)
