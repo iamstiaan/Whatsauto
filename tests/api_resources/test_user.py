@@ -191,14 +191,14 @@ class TestUser:
     @parametrize
     def test_method_create_with_list(self, client: Petstore) -> None:
         user = client.user.create_with_list(
-            items=[{}, {}, {}],
+            items=[{}],
         )
         assert_matches_type(User, user, path=["response"])
 
     @parametrize
     def test_raw_response_create_with_list(self, client: Petstore) -> None:
         response = client.user.with_raw_response.create_with_list(
-            items=[{}, {}, {}],
+            items=[{}],
         )
 
         assert response.is_closed is True
@@ -209,7 +209,7 @@ class TestUser:
     @parametrize
     def test_streaming_response_create_with_list(self, client: Petstore) -> None:
         with client.user.with_streaming_response.create_with_list(
-            items=[{}, {}, {}],
+            items=[{}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
@@ -453,14 +453,14 @@ class TestAsyncUser:
     @parametrize
     async def test_method_create_with_list(self, async_client: AsyncPetstore) -> None:
         user = await async_client.user.create_with_list(
-            items=[{}, {}, {}],
+            items=[{}],
         )
         assert_matches_type(User, user, path=["response"])
 
     @parametrize
     async def test_raw_response_create_with_list(self, async_client: AsyncPetstore) -> None:
         response = await async_client.user.with_raw_response.create_with_list(
-            items=[{}, {}, {}],
+            items=[{}],
         )
 
         assert response.is_closed is True
@@ -471,7 +471,7 @@ class TestAsyncUser:
     @parametrize
     async def test_streaming_response_create_with_list(self, async_client: AsyncPetstore) -> None:
         async with async_client.user.with_streaming_response.create_with_list(
-            items=[{}, {}, {}],
+            items=[{}],
         ) as response:
             assert not response.is_closed
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
