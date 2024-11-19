@@ -10,7 +10,7 @@ const client = new Petstore({
 
 describe('resource pets', () => {
   test('create: only required params', async () => {
-    const responsePromise = client.pets.create({ name: 'doggie', photoUrls: ['string', 'string', 'string'] });
+    const responsePromise = client.pets.create({ name: 'doggie', photoUrls: ['string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -23,15 +23,11 @@ describe('resource pets', () => {
   test('create: required and optional params', async () => {
     const response = await client.pets.create({
       name: 'doggie',
-      photoUrls: ['string', 'string', 'string'],
+      photoUrls: ['string'],
       id: 10,
       category: { id: 1, name: 'Dogs' },
       status: 'available',
-      tags: [
-        { id: 0, name: 'name' },
-        { id: 0, name: 'name' },
-        { id: 0, name: 'name' },
-      ],
+      tags: [{ id: 0, name: 'name' }],
     });
   });
 
@@ -54,7 +50,7 @@ describe('resource pets', () => {
   });
 
   test('update: only required params', async () => {
-    const responsePromise = client.pets.update({ name: 'doggie', photoUrls: ['string', 'string', 'string'] });
+    const responsePromise = client.pets.update({ name: 'doggie', photoUrls: ['string'] });
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -67,15 +63,11 @@ describe('resource pets', () => {
   test('update: required and optional params', async () => {
     const response = await client.pets.update({
       name: 'doggie',
-      photoUrls: ['string', 'string', 'string'],
+      photoUrls: ['string'],
       id: 10,
       category: { id: 1, name: 'Dogs' },
       status: 'available',
-      tags: [
-        { id: 0, name: 'name' },
-        { id: 0, name: 'name' },
-        { id: 0, name: 'name' },
-      ],
+      tags: [{ id: 0, name: 'name' }],
     });
   });
 
@@ -143,7 +135,7 @@ describe('resource pets', () => {
   test('findByTags: request options and params are passed correctly', async () => {
     // ensure the request options are being passed correctly by passing an invalid HTTP method in order to cause an error
     await expect(
-      client.pets.findByTags({ tags: ['string', 'string', 'string'] }, { path: '/_stainless_unknown_path' }),
+      client.pets.findByTags({ tags: ['string'] }, { path: '/_stainless_unknown_path' }),
     ).rejects.toThrow(Petstore.NotFoundError);
   });
 
