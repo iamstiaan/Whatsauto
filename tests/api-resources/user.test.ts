@@ -121,7 +121,7 @@ describe('resource user', () => {
   });
 
   test('createWithList: only required params', async () => {
-    const responsePromise = client.user.createWithList([{}, {}, {}]);
+    const responsePromise = client.user.createWithList([{}]);
     const rawResponse = await responsePromise.asResponse();
     expect(rawResponse).toBeInstanceOf(Response);
     const response = await responsePromise;
@@ -133,26 +133,6 @@ describe('resource user', () => {
 
   test('createWithList: required and optional params', async () => {
     const response = await client.user.createWithList([
-      {
-        id: 10,
-        email: 'john@email.com',
-        firstName: 'John',
-        lastName: 'James',
-        password: '12345',
-        phone: '12345',
-        username: 'theUser',
-        userStatus: 1,
-      },
-      {
-        id: 10,
-        email: 'john@email.com',
-        firstName: 'John',
-        lastName: 'James',
-        password: '12345',
-        phone: '12345',
-        username: 'theUser',
-        userStatus: 1,
-      },
       {
         id: 10,
         email: 'john@email.com',
