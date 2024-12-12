@@ -22,7 +22,7 @@ class TestUser:
     @parametrize
     def test_method_create(self, client: Petstore) -> None:
         user = client.user.create()
-        assert user is None
+        assert_matches_type(User, user, path=["response"])
 
     @parametrize
     def test_method_create_with_all_params(self, client: Petstore) -> None:
@@ -36,7 +36,7 @@ class TestUser:
             username="theUser",
             user_status=1,
         )
-        assert user is None
+        assert_matches_type(User, user, path=["response"])
 
     @parametrize
     def test_raw_response_create(self, client: Petstore) -> None:
@@ -45,7 +45,7 @@ class TestUser:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         user = response.parse()
-        assert user is None
+        assert_matches_type(User, user, path=["response"])
 
     @parametrize
     def test_streaming_response_create(self, client: Petstore) -> None:
@@ -54,7 +54,7 @@ class TestUser:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             user = response.parse()
-            assert user is None
+            assert_matches_type(User, user, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 
@@ -284,7 +284,7 @@ class TestAsyncUser:
     @parametrize
     async def test_method_create(self, async_client: AsyncPetstore) -> None:
         user = await async_client.user.create()
-        assert user is None
+        assert_matches_type(User, user, path=["response"])
 
     @parametrize
     async def test_method_create_with_all_params(self, async_client: AsyncPetstore) -> None:
@@ -298,7 +298,7 @@ class TestAsyncUser:
             username="theUser",
             user_status=1,
         )
-        assert user is None
+        assert_matches_type(User, user, path=["response"])
 
     @parametrize
     async def test_raw_response_create(self, async_client: AsyncPetstore) -> None:
@@ -307,7 +307,7 @@ class TestAsyncUser:
         assert response.is_closed is True
         assert response.http_request.headers.get("X-Stainless-Lang") == "python"
         user = await response.parse()
-        assert user is None
+        assert_matches_type(User, user, path=["response"])
 
     @parametrize
     async def test_streaming_response_create(self, async_client: AsyncPetstore) -> None:
@@ -316,7 +316,7 @@ class TestAsyncUser:
             assert response.http_request.headers.get("X-Stainless-Lang") == "python"
 
             user = await response.parse()
-            assert user is None
+            assert_matches_type(User, user, path=["response"])
 
         assert cast(Any, response.is_closed) is True
 

@@ -53,7 +53,7 @@ from whatsauto.types import User, UserLoginResponse
 
 Methods:
 
-- <code title="post /user">client.user.<a href="./src/whatsauto/resources/user.py">create</a>(\*\*<a href="src/whatsauto/types/user_create_params.py">params</a>) -> None</code>
+- <code title="post /user">client.user.<a href="./src/whatsauto/resources/user.py">create</a>(\*\*<a href="src/whatsauto/types/user_create_params.py">params</a>) -> <a href="./src/whatsauto/types/user.py">User</a></code>
 - <code title="get /user/{username}">client.user.<a href="./src/whatsauto/resources/user.py">retrieve</a>(username) -> <a href="./src/whatsauto/types/user.py">User</a></code>
 - <code title="put /user/{username}">client.user.<a href="./src/whatsauto/resources/user.py">update</a>(existing_username, \*\*<a href="src/whatsauto/types/user_update_params.py">params</a>) -> None</code>
 - <code title="delete /user/{username}">client.user.<a href="./src/whatsauto/resources/user.py">delete</a>(username) -> None</code>
