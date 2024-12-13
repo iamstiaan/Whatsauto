@@ -8,16 +8,16 @@ export class UserResource extends APIResource {
   /**
    * This can only be done by the logged in user.
    */
-  create(body?: UserCreateParams, options?: Core.RequestOptions): Core.APIPromise<void>;
-  create(options?: Core.RequestOptions): Core.APIPromise<void>;
+  create(body?: UserCreateParams, options?: Core.RequestOptions): Core.APIPromise<User>;
+  create(options?: Core.RequestOptions): Core.APIPromise<User>;
   create(
     body: UserCreateParams | Core.RequestOptions = {},
     options?: Core.RequestOptions,
-  ): Core.APIPromise<void> {
+  ): Core.APIPromise<User> {
     if (isRequestOptions(body)) {
       return this.create({}, body);
     }
-    return this._client.post('/user', { body, ...options, headers: { Accept: '*/*', ...options?.headers } });
+    return this._client.post('/user', { body, ...options });
   }
 
   /**
