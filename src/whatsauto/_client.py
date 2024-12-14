@@ -8,7 +8,7 @@ from typing_extensions import Self, override
 
 import httpx
 
-from . import resources, _exceptions
+from . import _exceptions
 from ._qs import Querystring
 from ._types import (
     NOT_GIVEN,
@@ -24,6 +24,7 @@ from ._utils import (
     get_async_library,
 )
 from ._version import __version__
+from .resources import pets, user
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import PetstoreError, APIStatusError
 from ._base_client import (
@@ -31,13 +32,13 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
+from .resources.store import store
 
 __all__ = [
     "Timeout",
     "Transport",
     "ProxiesTypes",
     "RequestOptions",
-    "resources",
     "Petstore",
     "AsyncPetstore",
     "Client",
@@ -46,9 +47,9 @@ __all__ = [
 
 
 class Petstore(SyncAPIClient):
-    pets: resources.PetsResource
-    store: resources.StoreResource
-    user: resources.UserResource
+    pets: pets.PetsResource
+    store: store.StoreResource
+    user: user.UserResource
     with_raw_response: PetstoreWithRawResponse
     with_streaming_response: PetstoreWithStreamedResponse
 
@@ -106,9 +107,9 @@ class Petstore(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.pets = resources.PetsResource(self)
-        self.store = resources.StoreResource(self)
-        self.user = resources.UserResource(self)
+        self.pets = pets.PetsResource(self)
+        self.store = store.StoreResource(self)
+        self.user = user.UserResource(self)
         self.with_raw_response = PetstoreWithRawResponse(self)
         self.with_streaming_response = PetstoreWithStreamedResponse(self)
 
@@ -218,9 +219,9 @@ class Petstore(SyncAPIClient):
 
 
 class AsyncPetstore(AsyncAPIClient):
-    pets: resources.AsyncPetsResource
-    store: resources.AsyncStoreResource
-    user: resources.AsyncUserResource
+    pets: pets.AsyncPetsResource
+    store: store.AsyncStoreResource
+    user: user.AsyncUserResource
     with_raw_response: AsyncPetstoreWithRawResponse
     with_streaming_response: AsyncPetstoreWithStreamedResponse
 
@@ -278,9 +279,9 @@ class AsyncPetstore(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.pets = resources.AsyncPetsResource(self)
-        self.store = resources.AsyncStoreResource(self)
-        self.user = resources.AsyncUserResource(self)
+        self.pets = pets.AsyncPetsResource(self)
+        self.store = store.AsyncStoreResource(self)
+        self.user = user.AsyncUserResource(self)
         self.with_raw_response = AsyncPetstoreWithRawResponse(self)
         self.with_streaming_response = AsyncPetstoreWithStreamedResponse(self)
 
@@ -391,30 +392,30 @@ class AsyncPetstore(AsyncAPIClient):
 
 class PetstoreWithRawResponse:
     def __init__(self, client: Petstore) -> None:
-        self.pets = resources.PetsResourceWithRawResponse(client.pets)
-        self.store = resources.StoreResourceWithRawResponse(client.store)
-        self.user = resources.UserResourceWithRawResponse(client.user)
+        self.pets = pets.PetsResourceWithRawResponse(client.pets)
+        self.store = store.StoreResourceWithRawResponse(client.store)
+        self.user = user.UserResourceWithRawResponse(client.user)
 
 
 class AsyncPetstoreWithRawResponse:
     def __init__(self, client: AsyncPetstore) -> None:
-        self.pets = resources.AsyncPetsResourceWithRawResponse(client.pets)
-        self.store = resources.AsyncStoreResourceWithRawResponse(client.store)
-        self.user = resources.AsyncUserResourceWithRawResponse(client.user)
+        self.pets = pets.AsyncPetsResourceWithRawResponse(client.pets)
+        self.store = store.AsyncStoreResourceWithRawResponse(client.store)
+        self.user = user.AsyncUserResourceWithRawResponse(client.user)
 
 
 class PetstoreWithStreamedResponse:
     def __init__(self, client: Petstore) -> None:
-        self.pets = resources.PetsResourceWithStreamingResponse(client.pets)
-        self.store = resources.StoreResourceWithStreamingResponse(client.store)
-        self.user = resources.UserResourceWithStreamingResponse(client.user)
+        self.pets = pets.PetsResourceWithStreamingResponse(client.pets)
+        self.store = store.StoreResourceWithStreamingResponse(client.store)
+        self.user = user.UserResourceWithStreamingResponse(client.user)
 
 
 class AsyncPetstoreWithStreamedResponse:
     def __init__(self, client: AsyncPetstore) -> None:
-        self.pets = resources.AsyncPetsResourceWithStreamingResponse(client.pets)
-        self.store = resources.AsyncStoreResourceWithStreamingResponse(client.store)
-        self.user = resources.AsyncUserResourceWithStreamingResponse(client.user)
+        self.pets = pets.AsyncPetsResourceWithStreamingResponse(client.pets)
+        self.store = store.AsyncStoreResourceWithStreamingResponse(client.store)
+        self.user = user.AsyncUserResourceWithStreamingResponse(client.user)
 
 
 Client = Petstore
