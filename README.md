@@ -11,7 +11,7 @@ It is generated with [Stainless](https://www.stainlessapi.com/).
 ## Installation
 
 ```sh
-npm install git+ssh://git@github.com:stainless-sdks/whatsauto-node.git
+npm install git+ssh://git@github.com:iamstiaan/Whatsauto.git
 ```
 
 > [!NOTE]
@@ -218,7 +218,7 @@ import Petstore from 'whatsauto';
 ```
 
 To do the inverse, add `import "whatsauto/shims/node"` (which does import polyfills).
-This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/stainless-sdks/whatsauto-node/tree/main/src/_shims#readme)).
+This can also be useful if you are getting the wrong TypeScript types for `Response` ([more details](https://github.com/iamstiaan/Whatsauto/tree/main/src/_shims#readme)).
 
 ### Logging and middleware
 
@@ -274,7 +274,7 @@ This package generally follows [SemVer](https://semver.org/spec/v2.0.0.html) con
 
 We take backwards-compatibility seriously and work hard to ensure you can rely on a smooth upgrade experience.
 
-We are keen for your feedback; please open an [issue](https://www.github.com/stainless-sdks/whatsauto-node/issues) with questions, bugs, or suggestions.
+We are keen for your feedback; please open an [issue](https://www.github.com/iamstiaan/Whatsauto/issues) with questions, bugs, or suggestions.
 
 ## Requirements
 
@@ -284,7 +284,7 @@ The following runtimes are supported:
 
 - Web browsers (Up-to-date Chrome, Firefox, Safari, Edge, and more)
 - Node.js 18 LTS or later ([non-EOL](https://endoflife.date/nodejs)) versions.
-- Deno v1.28.0 or higher, using `import Petstore from "npm:whatsauto"`.
+- Deno v1.28.0 or higher.
 - Bun 1.0 or later.
 - Cloudflare Workers.
 - Vercel Edge Runtime.
