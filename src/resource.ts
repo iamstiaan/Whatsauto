@@ -2,7 +2,7 @@
 
 import type { Petstore } from './index';
 
-export class APIResource {
+export abstract class APIResource {
   protected _client: Petstore;
 
   constructor(client: Petstore) {
