@@ -9,7 +9,13 @@ from whatsauto.types import Order
 Types:
 
 ```python
-from whatsauto.types import APIResponse, Pet, PetFindByStatusResponse, PetFindByTagsResponse
+from whatsauto.types import (
+    APIResponse,
+    Category,
+    Pet,
+    PetFindByStatusResponse,
+    PetFindByTagsResponse,
+)
 ```
 
 Methods:
