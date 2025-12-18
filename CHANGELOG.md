@@ -1,6 +1,6 @@
 # Changelog
 
-## 0.1.0-alpha.1 (2024-12-13)
+## 0.1.0-alpha.1 (2025-12-18)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/iamstiaan/Whatsauto/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
 
@@ -18,7 +18,9 @@ Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/iamstiaan/W
 * **internal:** update isAbsoluteURL ([#11](https://github.com/iamstiaan/Whatsauto/issues/11)) ([31e4566](https://github.com/iamstiaan/Whatsauto/commit/31e45660cdf0272e3caad98e0c3286d732ee627a))
 * rebuild project due to codegen change ([#4](https://github.com/iamstiaan/Whatsauto/issues/4)) ([bdfb661](https://github.com/iamstiaan/Whatsauto/commit/bdfb661e6a07d8e55162023bd78adc0cec2a0852))
 * remove redundant word in comment ([#6](https://github.com/iamstiaan/Whatsauto/issues/6)) ([b735c0f](https://github.com/iamstiaan/Whatsauto/commit/b735c0f95adb7934ee56c2ff766b32bfd4650e76))
+* sync repo ([89fefec](https://github.com/iamstiaan/Whatsauto/commit/89fefecda8421e985110b25902a789f27a32338d))
 * **types:** nicer error class types + jsdocs ([#10](https://github.com/iamstiaan/Whatsauto/issues/10)) ([15da8b4](https://github.com/iamstiaan/Whatsauto/commit/15da8b4785314a622ff6729cdb60d4d413d2affb))
+* update SDK settings ([78c2101](https://github.com/iamstiaan/Whatsauto/commit/78c2101b171fc3adf0787fe6abc7fba69b34d688))
 
 
 ### Documentation
