@@ -2,7 +2,7 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Iterable
 from typing_extensions import Literal
 
 import httpx
@@ -15,11 +15,20 @@ from ..types import (
     pet_upload_image_params,
     pet_find_by_status_params,
 )
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven, FileTypes
-from .._utils import (
-    maybe_transform,
-    async_maybe_transform,
+from .._files import read_file_content, async_read_file_content
+from .._types import (
+    Body,
+    Omit,
+    Query,
+    Headers,
+    NoneType,
+    NotGiven,
+    FileContent,
+    SequenceNotStr,
+    omit,
+    not_given,
 )
+from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -41,7 +50,7 @@ class PetsResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> PetsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/whatsauto-python#accessing-raw-response-data-eg-headers
@@ -61,17 +70,17 @@ class PetsResource(SyncAPIResource):
         self,
         *,
         name: str,
-        photo_urls: List[str],
-        id: int | NotGiven = NOT_GIVEN,
-        category: pet_create_params.Category | NotGiven = NOT_GIVEN,
-        status: Literal["available", "pending", "sold"] | NotGiven = NOT_GIVEN,
-        tags: Iterable[pet_create_params.Tag] | NotGiven = NOT_GIVEN,
+        photo_urls: SequenceNotStr[str],
+        id: int | Omit = omit,
+        category: pet_create_params.Category | Omit = omit,
+        status: Literal["available", "pending", "sold"] | Omit = omit,
+        tags: Iterable[pet_create_params.Tag] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Pet:
         """
         Add a new pet to the store
@@ -115,7 +124,7 @@ class PetsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Pet:
         """
         Returns a single pet
@@ -141,17 +150,17 @@ class PetsResource(SyncAPIResource):
         self,
         *,
         name: str,
-        photo_urls: List[str],
-        id: int | NotGiven = NOT_GIVEN,
-        category: pet_update_params.Category | NotGiven = NOT_GIVEN,
-        status: Literal["available", "pending", "sold"] | NotGiven = NOT_GIVEN,
-        tags: Iterable[pet_update_params.Tag] | NotGiven = NOT_GIVEN,
+        photo_urls: SequenceNotStr[str],
+        id: int | Omit = omit,
+        category: pet_update_params.Category | Omit = omit,
+        status: Literal["available", "pending", "sold"] | Omit = omit,
+        tags: Iterable[pet_update_params.Tag] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Pet:
         """
         Update an existing pet by Id
@@ -195,7 +204,7 @@ class PetsResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         delete a pet
@@ -221,13 +230,13 @@ class PetsResource(SyncAPIResource):
     def find_by_status(
         self,
         *,
-        status: Literal["available", "pending", "sold"] | NotGiven = NOT_GIVEN,
+        status: Literal["available", "pending", "sold"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PetFindByStatusResponse:
         """
         Multiple status values can be provided with comma separated strings
@@ -258,13 +267,13 @@ class PetsResource(SyncAPIResource):
     def find_by_tags(
         self,
         *,
-        tags: List[str] | NotGiven = NOT_GIVEN,
+        tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PetFindByTagsResponse:
         """Multiple tags can be provided with comma separated strings.
 
@@ -298,14 +307,14 @@ class PetsResource(SyncAPIResource):
         self,
         pet_id: int,
         *,
-        name: str | NotGiven = NOT_GIVEN,
-        status: str | NotGiven = NOT_GIVEN,
+        name: str | Omit = omit,
+        status: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Updates a pet in the store with form data
@@ -345,15 +354,15 @@ class PetsResource(SyncAPIResource):
     def upload_image(
         self,
         pet_id: int,
+        image: FileContent,
         *,
-        image: FileTypes,
-        additional_metadata: str | NotGiven = NOT_GIVEN,
+        additional_metadata: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIResponse:
         """
         uploads an image
@@ -369,9 +378,10 @@ class PetsResource(SyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Content-Type": "application/octet-stream", **(extra_headers or {})}
         return self._post(
             f"/pet/{pet_id}/uploadImage",
-            body=maybe_transform(image, pet_upload_image_params.PetUploadImageParams),
+            body=read_file_content(image),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -389,7 +399,7 @@ class AsyncPetsResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncPetsResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/whatsauto-python#accessing-raw-response-data-eg-headers
@@ -409,17 +419,17 @@ class AsyncPetsResource(AsyncAPIResource):
         self,
         *,
         name: str,
-        photo_urls: List[str],
-        id: int | NotGiven = NOT_GIVEN,
-        category: pet_create_params.Category | NotGiven = NOT_GIVEN,
-        status: Literal["available", "pending", "sold"] | NotGiven = NOT_GIVEN,
-        tags: Iterable[pet_create_params.Tag] | NotGiven = NOT_GIVEN,
+        photo_urls: SequenceNotStr[str],
+        id: int | Omit = omit,
+        category: pet_create_params.Category | Omit = omit,
+        status: Literal["available", "pending", "sold"] | Omit = omit,
+        tags: Iterable[pet_create_params.Tag] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Pet:
         """
         Add a new pet to the store
@@ -463,7 +473,7 @@ class AsyncPetsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Pet:
         """
         Returns a single pet
@@ -489,17 +499,17 @@ class AsyncPetsResource(AsyncAPIResource):
         self,
         *,
         name: str,
-        photo_urls: List[str],
-        id: int | NotGiven = NOT_GIVEN,
-        category: pet_update_params.Category | NotGiven = NOT_GIVEN,
-        status: Literal["available", "pending", "sold"] | NotGiven = NOT_GIVEN,
-        tags: Iterable[pet_update_params.Tag] | NotGiven = NOT_GIVEN,
+        photo_urls: SequenceNotStr[str],
+        id: int | Omit = omit,
+        category: pet_update_params.Category | Omit = omit,
+        status: Literal["available", "pending", "sold"] | Omit = omit,
+        tags: Iterable[pet_update_params.Tag] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Pet:
         """
         Update an existing pet by Id
@@ -543,7 +553,7 @@ class AsyncPetsResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         delete a pet
@@ -569,13 +579,13 @@ class AsyncPetsResource(AsyncAPIResource):
     async def find_by_status(
         self,
         *,
-        status: Literal["available", "pending", "sold"] | NotGiven = NOT_GIVEN,
+        status: Literal["available", "pending", "sold"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PetFindByStatusResponse:
         """
         Multiple status values can be provided with comma separated strings
@@ -606,13 +616,13 @@ class AsyncPetsResource(AsyncAPIResource):
     async def find_by_tags(
         self,
         *,
-        tags: List[str] | NotGiven = NOT_GIVEN,
+        tags: SequenceNotStr[str] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> PetFindByTagsResponse:
         """Multiple tags can be provided with comma separated strings.
 
@@ -646,14 +656,14 @@ class AsyncPetsResource(AsyncAPIResource):
         self,
         pet_id: int,
         *,
-        name: str | NotGiven = NOT_GIVEN,
-        status: str | NotGiven = NOT_GIVEN,
+        name: str | Omit = omit,
+        status: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         Updates a pet in the store with form data
@@ -693,15 +703,15 @@ class AsyncPetsResource(AsyncAPIResource):
     async def upload_image(
         self,
         pet_id: int,
+        image: FileContent,
         *,
-        image: FileTypes,
-        additional_metadata: str | NotGiven = NOT_GIVEN,
+        additional_metadata: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> APIResponse:
         """
         uploads an image
@@ -717,9 +727,10 @@ class AsyncPetsResource(AsyncAPIResource):
 
           timeout: Override the client-level default timeout for this request, in seconds
         """
+        extra_headers = {"Content-Type": "application/octet-stream", **(extra_headers or {})}
         return await self._post(
             f"/pet/{pet_id}/uploadImage",
-            body=await async_maybe_transform(image, pet_upload_image_params.PetUploadImageParams),
+            body=await async_read_file_content(image),
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

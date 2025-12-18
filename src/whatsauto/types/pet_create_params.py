@@ -2,9 +2,10 @@
 
 from __future__ import annotations
 
-from typing import List, Iterable
+from typing import Iterable
 from typing_extensions import Literal, Required, Annotated, TypedDict
 
+from .._types import SequenceNotStr
 from .._utils import PropertyInfo
 
 __all__ = ["PetCreateParams", "Category", "Tag"]
@@ -13,7 +14,7 @@ __all__ = ["PetCreateParams", "Category", "Tag"]
 class PetCreateParams(TypedDict, total=False):
     name: Required[str]
 
-    photo_urls: Required[Annotated[List[str], PropertyInfo(alias="photoUrls")]]
+    photo_urls: Required[Annotated[SequenceNotStr[str], PropertyInfo(alias="photoUrls")]]
 
     id: int
 

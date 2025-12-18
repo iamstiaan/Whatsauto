@@ -3,7 +3,7 @@
 from __future__ import annotations
 
 import os
-from typing import Any, Union, Mapping
+from typing import TYPE_CHECKING, Any, Mapping
 from typing_extensions import Self, override
 
 import httpx
@@ -11,20 +11,17 @@ import httpx
 from . import _exceptions
 from ._qs import Querystring
 from ._types import (
-    NOT_GIVEN,
     Omit,
     Timeout,
     NotGiven,
     Transport,
     ProxiesTypes,
     RequestOptions,
+    not_given,
 )
-from ._utils import (
-    is_given,
-    get_async_library,
-)
+from ._utils import is_given, get_async_library
+from ._compat import cached_property
 from ._version import __version__
-from .resources import pets, user
 from ._streaming import Stream as Stream, AsyncStream as AsyncStream
 from ._exceptions import PetstoreError, APIStatusError
 from ._base_client import (
@@ -32,7 +29,12 @@ from ._base_client import (
     SyncAPIClient,
     AsyncAPIClient,
 )
-from .resources.store import store
+
+if TYPE_CHECKING:
+    from .resources import pets, user, store
+    from .resources.pets import PetsResource, AsyncPetsResource
+    from .resources.user import UserResource, AsyncUserResource
+    from .resources.store.store import StoreResource, AsyncStoreResource
 
 __all__ = [
     "Timeout",
@@ -47,12 +49,6 @@ __all__ = [
 
 
 class Petstore(SyncAPIClient):
-    pets: pets.PetsResource
-    store: store.StoreResource
-    user: user.UserResource
-    with_raw_response: PetstoreWithRawResponse
-    with_streaming_response: PetstoreWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -61,7 +57,7 @@ class Petstore(SyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -79,7 +75,7 @@ class Petstore(SyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new synchronous petstore client instance.
+        """Construct a new synchronous Petstore client instance.
 
         This automatically infers the `api_key` argument from the `PETSTORE_API_KEY` environment variable if it is not provided.
         """
@@ -107,11 +103,31 @@ class Petstore(SyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.pets = pets.PetsResource(self)
-        self.store = store.StoreResource(self)
-        self.user = user.UserResource(self)
-        self.with_raw_response = PetstoreWithRawResponse(self)
-        self.with_streaming_response = PetstoreWithStreamedResponse(self)
+    @cached_property
+    def pets(self) -> PetsResource:
+        from .resources.pets import PetsResource
+
+        return PetsResource(self)
+
+    @cached_property
+    def store(self) -> StoreResource:
+        from .resources.store import StoreResource
+
+        return StoreResource(self)
+
+    @cached_property
+    def user(self) -> UserResource:
+        from .resources.user import UserResource
+
+        return UserResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> PetstoreWithRawResponse:
+        return PetstoreWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> PetstoreWithStreamedResponse:
+        return PetstoreWithStreamedResponse(self)
 
     @property
     @override
@@ -138,9 +154,9 @@ class Petstore(SyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.Client | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -219,12 +235,6 @@ class Petstore(SyncAPIClient):
 
 
 class AsyncPetstore(AsyncAPIClient):
-    pets: pets.AsyncPetsResource
-    store: store.AsyncStoreResource
-    user: user.AsyncUserResource
-    with_raw_response: AsyncPetstoreWithRawResponse
-    with_streaming_response: AsyncPetstoreWithStreamedResponse
-
     # client options
     api_key: str
 
@@ -233,7 +243,7 @@ class AsyncPetstore(AsyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: Union[float, Timeout, None, NotGiven] = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         max_retries: int = DEFAULT_MAX_RETRIES,
         default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -251,7 +261,7 @@ class AsyncPetstore(AsyncAPIClient):
         # part of our public interface in the future.
         _strict_response_validation: bool = False,
     ) -> None:
-        """Construct a new async petstore client instance.
+        """Construct a new async AsyncPetstore client instance.
 
         This automatically infers the `api_key` argument from the `PETSTORE_API_KEY` environment variable if it is not provided.
         """
@@ -279,11 +289,31 @@ class AsyncPetstore(AsyncAPIClient):
             _strict_response_validation=_strict_response_validation,
         )
 
-        self.pets = pets.AsyncPetsResource(self)
-        self.store = store.AsyncStoreResource(self)
-        self.user = user.AsyncUserResource(self)
-        self.with_raw_response = AsyncPetstoreWithRawResponse(self)
-        self.with_streaming_response = AsyncPetstoreWithStreamedResponse(self)
+    @cached_property
+    def pets(self) -> AsyncPetsResource:
+        from .resources.pets import AsyncPetsResource
+
+        return AsyncPetsResource(self)
+
+    @cached_property
+    def store(self) -> AsyncStoreResource:
+        from .resources.store import AsyncStoreResource
+
+        return AsyncStoreResource(self)
+
+    @cached_property
+    def user(self) -> AsyncUserResource:
+        from .resources.user import AsyncUserResource
+
+        return AsyncUserResource(self)
+
+    @cached_property
+    def with_raw_response(self) -> AsyncPetstoreWithRawResponse:
+        return AsyncPetstoreWithRawResponse(self)
+
+    @cached_property
+    def with_streaming_response(self) -> AsyncPetstoreWithStreamedResponse:
+        return AsyncPetstoreWithStreamedResponse(self)
 
     @property
     @override
@@ -310,9 +340,9 @@ class AsyncPetstore(AsyncAPIClient):
         *,
         api_key: str | None = None,
         base_url: str | httpx.URL | None = None,
-        timeout: float | Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | Timeout | None | NotGiven = not_given,
         http_client: httpx.AsyncClient | None = None,
-        max_retries: int | NotGiven = NOT_GIVEN,
+        max_retries: int | NotGiven = not_given,
         default_headers: Mapping[str, str] | None = None,
         set_default_headers: Mapping[str, str] | None = None,
         default_query: Mapping[str, object] | None = None,
@@ -391,31 +421,103 @@ class AsyncPetstore(AsyncAPIClient):
 
 
 class PetstoreWithRawResponse:
+    _client: Petstore
+
     def __init__(self, client: Petstore) -> None:
-        self.pets = pets.PetsResourceWithRawResponse(client.pets)
-        self.store = store.StoreResourceWithRawResponse(client.store)
-        self.user = user.UserResourceWithRawResponse(client.user)
+        self._client = client
+
+    @cached_property
+    def pets(self) -> pets.PetsResourceWithRawResponse:
+        from .resources.pets import PetsResourceWithRawResponse
+
+        return PetsResourceWithRawResponse(self._client.pets)
+
+    @cached_property
+    def store(self) -> store.StoreResourceWithRawResponse:
+        from .resources.store import StoreResourceWithRawResponse
+
+        return StoreResourceWithRawResponse(self._client.store)
+
+    @cached_property
+    def user(self) -> user.UserResourceWithRawResponse:
+        from .resources.user import UserResourceWithRawResponse
+
+        return UserResourceWithRawResponse(self._client.user)
 
 
 class AsyncPetstoreWithRawResponse:
+    _client: AsyncPetstore
+
     def __init__(self, client: AsyncPetstore) -> None:
-        self.pets = pets.AsyncPetsResourceWithRawResponse(client.pets)
-        self.store = store.AsyncStoreResourceWithRawResponse(client.store)
-        self.user = user.AsyncUserResourceWithRawResponse(client.user)
+        self._client = client
+
+    @cached_property
+    def pets(self) -> pets.AsyncPetsResourceWithRawResponse:
+        from .resources.pets import AsyncPetsResourceWithRawResponse
+
+        return AsyncPetsResourceWithRawResponse(self._client.pets)
+
+    @cached_property
+    def store(self) -> store.AsyncStoreResourceWithRawResponse:
+        from .resources.store import AsyncStoreResourceWithRawResponse
+
+        return AsyncStoreResourceWithRawResponse(self._client.store)
+
+    @cached_property
+    def user(self) -> user.AsyncUserResourceWithRawResponse:
+        from .resources.user import AsyncUserResourceWithRawResponse
+
+        return AsyncUserResourceWithRawResponse(self._client.user)
 
 
 class PetstoreWithStreamedResponse:
+    _client: Petstore
+
     def __init__(self, client: Petstore) -> None:
-        self.pets = pets.PetsResourceWithStreamingResponse(client.pets)
-        self.store = store.StoreResourceWithStreamingResponse(client.store)
-        self.user = user.UserResourceWithStreamingResponse(client.user)
+        self._client = client
+
+    @cached_property
+    def pets(self) -> pets.PetsResourceWithStreamingResponse:
+        from .resources.pets import PetsResourceWithStreamingResponse
+
+        return PetsResourceWithStreamingResponse(self._client.pets)
+
+    @cached_property
+    def store(self) -> store.StoreResourceWithStreamingResponse:
+        from .resources.store import StoreResourceWithStreamingResponse
+
+        return StoreResourceWithStreamingResponse(self._client.store)
+
+    @cached_property
+    def user(self) -> user.UserResourceWithStreamingResponse:
+        from .resources.user import UserResourceWithStreamingResponse
+
+        return UserResourceWithStreamingResponse(self._client.user)
 
 
 class AsyncPetstoreWithStreamedResponse:
+    _client: AsyncPetstore
+
     def __init__(self, client: AsyncPetstore) -> None:
-        self.pets = pets.AsyncPetsResourceWithStreamingResponse(client.pets)
-        self.store = store.AsyncStoreResourceWithStreamingResponse(client.store)
-        self.user = user.AsyncUserResourceWithStreamingResponse(client.user)
+        self._client = client
+
+    @cached_property
+    def pets(self) -> pets.AsyncPetsResourceWithStreamingResponse:
+        from .resources.pets import AsyncPetsResourceWithStreamingResponse
+
+        return AsyncPetsResourceWithStreamingResponse(self._client.pets)
+
+    @cached_property
+    def store(self) -> store.AsyncStoreResourceWithStreamingResponse:
+        from .resources.store import AsyncStoreResourceWithStreamingResponse
+
+        return AsyncStoreResourceWithStreamingResponse(self._client.store)
+
+    @cached_property
+    def user(self) -> user.AsyncUserResourceWithStreamingResponse:
+        from .resources.user import AsyncUserResourceWithStreamingResponse
+
+        return AsyncUserResourceWithStreamingResponse(self._client.user)
 
 
 Client = Petstore

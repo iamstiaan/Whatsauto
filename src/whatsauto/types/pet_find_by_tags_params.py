@@ -2,12 +2,13 @@
 
 from __future__ import annotations
 
-from typing import List
 from typing_extensions import TypedDict
+
+from .._types import SequenceNotStr
 
 __all__ = ["PetFindByTagsParams"]
 
 
 class PetFindByTagsParams(TypedDict, total=False):
-    tags: List[str]
+    tags: SequenceNotStr[str]
     """Tags to filter by"""

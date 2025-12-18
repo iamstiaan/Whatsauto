@@ -17,11 +17,8 @@ from .order import (
     AsyncOrderResourceWithStreamingResponse,
 )
 from ...types import store_create_order_params
-from ..._types import NOT_GIVEN, Body, Query, Headers, NotGiven
-from ..._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ..._types import Body, Omit, Query, Headers, NotGiven, omit, not_given
+from ..._utils import maybe_transform, async_maybe_transform
 from ..._compat import cached_property
 from ..._resource import SyncAPIResource, AsyncAPIResource
 from ..._response import (
@@ -45,7 +42,7 @@ class StoreResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> StoreResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/whatsauto-python#accessing-raw-response-data-eg-headers
@@ -64,18 +61,18 @@ class StoreResource(SyncAPIResource):
     def create_order(
         self,
         *,
-        id: int | NotGiven = NOT_GIVEN,
-        complete: bool | NotGiven = NOT_GIVEN,
-        pet_id: int | NotGiven = NOT_GIVEN,
-        quantity: int | NotGiven = NOT_GIVEN,
-        ship_date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        status: Literal["placed", "approved", "delivered"] | NotGiven = NOT_GIVEN,
+        id: int | Omit = omit,
+        complete: bool | Omit = omit,
+        pet_id: int | Omit = omit,
+        quantity: int | Omit = omit,
+        ship_date: Union[str, datetime] | Omit = omit,
+        status: Literal["placed", "approved", "delivered"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Order:
         """
         Place a new order in the store
@@ -118,7 +115,7 @@ class StoreResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StoreInventoryResponse:
         """Returns a map of status codes to quantities"""
         return self._get(
@@ -138,7 +135,7 @@ class AsyncStoreResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncStoreResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/whatsauto-python#accessing-raw-response-data-eg-headers
@@ -157,18 +154,18 @@ class AsyncStoreResource(AsyncAPIResource):
     async def create_order(
         self,
         *,
-        id: int | NotGiven = NOT_GIVEN,
-        complete: bool | NotGiven = NOT_GIVEN,
-        pet_id: int | NotGiven = NOT_GIVEN,
-        quantity: int | NotGiven = NOT_GIVEN,
-        ship_date: Union[str, datetime] | NotGiven = NOT_GIVEN,
-        status: Literal["placed", "approved", "delivered"] | NotGiven = NOT_GIVEN,
+        id: int | Omit = omit,
+        complete: bool | Omit = omit,
+        pet_id: int | Omit = omit,
+        quantity: int | Omit = omit,
+        ship_date: Union[str, datetime] | Omit = omit,
+        status: Literal["placed", "approved", "delivered"] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> Order:
         """
         Place a new order in the store
@@ -211,7 +208,7 @@ class AsyncStoreResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> StoreInventoryResponse:
         """Returns a map of status codes to quantities"""
         return await self._get(

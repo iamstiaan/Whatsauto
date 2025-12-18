@@ -32,7 +32,7 @@ class TestStore:
             pet_id=198772,
             quantity=7,
             ship_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            status="placed",
+            status="approved",
         )
         assert_matches_type(Order, store, path=["response"])
 
@@ -83,7 +83,9 @@ class TestStore:
 
 
 class TestAsyncStore:
-    parametrize = pytest.mark.parametrize("async_client", [False, True], indirect=True, ids=["loose", "strict"])
+    parametrize = pytest.mark.parametrize(
+        "async_client", [False, True, {"http_client": "aiohttp"}], indirect=True, ids=["loose", "strict", "aiohttp"]
+    )
 
     @parametrize
     async def test_method_create_order(self, async_client: AsyncPetstore) -> None:
@@ -98,7 +100,7 @@ class TestAsyncStore:
             pet_id=198772,
             quantity=7,
             ship_date=parse_datetime("2019-12-27T18:11:19.117Z"),
-            status="placed",
+            status="approved",
         )
         assert_matches_type(Order, store, path=["response"])
 

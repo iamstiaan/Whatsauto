@@ -6,16 +6,9 @@ from typing import Iterable
 
 import httpx
 
-from ..types import (
-    user_login_params,
-    user_create_params,
-    user_update_params,
-)
-from .._types import NOT_GIVEN, Body, Query, Headers, NoneType, NotGiven
-from .._utils import (
-    maybe_transform,
-    async_maybe_transform,
-)
+from ..types import user_login_params, user_create_params, user_update_params
+from .._types import Body, Omit, Query, Headers, NoneType, NotGiven, omit, not_given
+from .._utils import maybe_transform, async_maybe_transform
 from .._compat import cached_property
 from .._resource import SyncAPIResource, AsyncAPIResource
 from .._response import (
@@ -35,7 +28,7 @@ class UserResource(SyncAPIResource):
     @cached_property
     def with_raw_response(self) -> UserResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/whatsauto-python#accessing-raw-response-data-eg-headers
@@ -54,20 +47,20 @@ class UserResource(SyncAPIResource):
     def create(
         self,
         *,
-        id: int | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        password: str | NotGiven = NOT_GIVEN,
-        phone: str | NotGiven = NOT_GIVEN,
-        username: str | NotGiven = NOT_GIVEN,
-        user_status: int | NotGiven = NOT_GIVEN,
+        id: int | Omit = omit,
+        email: str | Omit = omit,
+        first_name: str | Omit = omit,
+        last_name: str | Omit = omit,
+        password: str | Omit = omit,
+        phone: str | Omit = omit,
+        username: str | Omit = omit,
+        user_status: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> User:
         """
         This can only be done by the logged in user.
@@ -113,7 +106,7 @@ class UserResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> User:
         """
         Get user by user name
@@ -141,20 +134,20 @@ class UserResource(SyncAPIResource):
         self,
         existing_username: str,
         *,
-        id: int | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        password: str | NotGiven = NOT_GIVEN,
-        phone: str | NotGiven = NOT_GIVEN,
-        username: str | NotGiven = NOT_GIVEN,
-        user_status: int | NotGiven = NOT_GIVEN,
+        id: int | Omit = omit,
+        email: str | Omit = omit,
+        first_name: str | Omit = omit,
+        last_name: str | Omit = omit,
+        password: str | Omit = omit,
+        phone: str | Omit = omit,
+        username: str | Omit = omit,
+        user_status: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         This can only be done by the logged in user.
@@ -203,7 +196,7 @@ class UserResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         This can only be done by the logged in user.
@@ -231,13 +224,13 @@ class UserResource(SyncAPIResource):
     def create_with_list(
         self,
         *,
-        items: Iterable[UserParam],
+        items: Iterable[UserParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> User:
         """
         Creates list of users with given input array
@@ -263,14 +256,14 @@ class UserResource(SyncAPIResource):
     def login(
         self,
         *,
-        password: str | NotGiven = NOT_GIVEN,
-        username: str | NotGiven = NOT_GIVEN,
+        password: str | Omit = omit,
+        username: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Logs user into the system
@@ -314,7 +307,7 @@ class UserResource(SyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Logs out current logged in user session"""
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
@@ -331,7 +324,7 @@ class AsyncUserResource(AsyncAPIResource):
     @cached_property
     def with_raw_response(self) -> AsyncUserResourceWithRawResponse:
         """
-        This property can be used as a prefix for any HTTP method call to return the
+        This property can be used as a prefix for any HTTP method call to return
         the raw response object instead of the parsed content.
 
         For more information, see https://www.github.com/stainless-sdks/whatsauto-python#accessing-raw-response-data-eg-headers
@@ -350,20 +343,20 @@ class AsyncUserResource(AsyncAPIResource):
     async def create(
         self,
         *,
-        id: int | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        password: str | NotGiven = NOT_GIVEN,
-        phone: str | NotGiven = NOT_GIVEN,
-        username: str | NotGiven = NOT_GIVEN,
-        user_status: int | NotGiven = NOT_GIVEN,
+        id: int | Omit = omit,
+        email: str | Omit = omit,
+        first_name: str | Omit = omit,
+        last_name: str | Omit = omit,
+        password: str | Omit = omit,
+        phone: str | Omit = omit,
+        username: str | Omit = omit,
+        user_status: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> User:
         """
         This can only be done by the logged in user.
@@ -409,7 +402,7 @@ class AsyncUserResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> User:
         """
         Get user by user name
@@ -437,20 +430,20 @@ class AsyncUserResource(AsyncAPIResource):
         self,
         existing_username: str,
         *,
-        id: int | NotGiven = NOT_GIVEN,
-        email: str | NotGiven = NOT_GIVEN,
-        first_name: str | NotGiven = NOT_GIVEN,
-        last_name: str | NotGiven = NOT_GIVEN,
-        password: str | NotGiven = NOT_GIVEN,
-        phone: str | NotGiven = NOT_GIVEN,
-        username: str | NotGiven = NOT_GIVEN,
-        user_status: int | NotGiven = NOT_GIVEN,
+        id: int | Omit = omit,
+        email: str | Omit = omit,
+        first_name: str | Omit = omit,
+        last_name: str | Omit = omit,
+        password: str | Omit = omit,
+        phone: str | Omit = omit,
+        username: str | Omit = omit,
+        user_status: int | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         This can only be done by the logged in user.
@@ -499,7 +492,7 @@ class AsyncUserResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """
         This can only be done by the logged in user.
@@ -527,13 +520,13 @@ class AsyncUserResource(AsyncAPIResource):
     async def create_with_list(
         self,
         *,
-        items: Iterable[UserParam],
+        items: Iterable[UserParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> User:
         """
         Creates list of users with given input array
@@ -559,14 +552,14 @@ class AsyncUserResource(AsyncAPIResource):
     async def login(
         self,
         *,
-        password: str | NotGiven = NOT_GIVEN,
-        username: str | NotGiven = NOT_GIVEN,
+        password: str | Omit = omit,
+        username: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> str:
         """
         Logs user into the system
@@ -610,7 +603,7 @@ class AsyncUserResource(AsyncAPIResource):
         extra_headers: Headers | None = None,
         extra_query: Query | None = None,
         extra_body: Body | None = None,
-        timeout: float | httpx.Timeout | None | NotGiven = NOT_GIVEN,
+        timeout: float | httpx.Timeout | None | NotGiven = not_given,
     ) -> None:
         """Logs out current logged in user session"""
         extra_headers = {"Accept": "*/*", **(extra_headers or {})}
