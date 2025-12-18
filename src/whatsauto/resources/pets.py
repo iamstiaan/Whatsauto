@@ -39,6 +39,7 @@ from .._response import (
 )
 from ..types.pet import Pet
 from .._base_client import make_request_options
+from ..types.tag_param import TagParam
 from ..types.api_response import APIResponse
 from ..types.category_param import CategoryParam
 from ..types.pet_find_by_tags_response import PetFindByTagsResponse
@@ -75,7 +76,7 @@ class PetsResource(SyncAPIResource):
         id: int | Omit = omit,
         category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
-        tags: Iterable[pet_create_params.Tag] | Omit = omit,
+        tags: Iterable[TagParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -155,7 +156,7 @@ class PetsResource(SyncAPIResource):
         id: int | Omit = omit,
         category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
-        tags: Iterable[pet_update_params.Tag] | Omit = omit,
+        tags: Iterable[TagParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -424,7 +425,7 @@ class AsyncPetsResource(AsyncAPIResource):
         id: int | Omit = omit,
         category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
-        tags: Iterable[pet_create_params.Tag] | Omit = omit,
+        tags: Iterable[TagParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -504,7 +505,7 @@ class AsyncPetsResource(AsyncAPIResource):
         id: int | Omit = omit,
         category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
-        tags: Iterable[pet_update_params.Tag] | Omit = omit,
+        tags: Iterable[TagParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,

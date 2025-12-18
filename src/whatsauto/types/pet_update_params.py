@@ -7,9 +7,10 @@ from typing_extensions import Literal, Required, Annotated, TypedDict
 
 from .._types import SequenceNotStr
 from .._utils import PropertyInfo
+from .tag_param import TagParam
 from .category_param import CategoryParam
 
-__all__ = ["PetUpdateParams", "Tag"]
+__all__ = ["PetUpdateParams"]
 
 
 class PetUpdateParams(TypedDict, total=False):
@@ -24,10 +25,4 @@ class PetUpdateParams(TypedDict, total=False):
     status: Literal["available", "pending", "sold"]
     """pet status in the store"""
 
-    tags: Iterable[Tag]
-
-
-class Tag(TypedDict, total=False):
-    id: int
-
-    name: str
+    tags: Iterable[TagParam]
