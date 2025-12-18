@@ -40,6 +40,7 @@ from .._response import (
 from ..types.pet import Pet
 from .._base_client import make_request_options
 from ..types.api_response import APIResponse
+from ..types.category_param import CategoryParam
 from ..types.pet_find_by_tags_response import PetFindByTagsResponse
 from ..types.pet_find_by_status_response import PetFindByStatusResponse
 
@@ -72,7 +73,7 @@ class PetsResource(SyncAPIResource):
         name: str,
         photo_urls: SequenceNotStr[str],
         id: int | Omit = omit,
-        category: pet_create_params.Category | Omit = omit,
+        category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
         tags: Iterable[pet_create_params.Tag] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -152,7 +153,7 @@ class PetsResource(SyncAPIResource):
         name: str,
         photo_urls: SequenceNotStr[str],
         id: int | Omit = omit,
-        category: pet_update_params.Category | Omit = omit,
+        category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
         tags: Iterable[pet_update_params.Tag] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -421,7 +422,7 @@ class AsyncPetsResource(AsyncAPIResource):
         name: str,
         photo_urls: SequenceNotStr[str],
         id: int | Omit = omit,
-        category: pet_create_params.Category | Omit = omit,
+        category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
         tags: Iterable[pet_create_params.Tag] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -501,7 +502,7 @@ class AsyncPetsResource(AsyncAPIResource):
         name: str,
         photo_urls: SequenceNotStr[str],
         id: int | Omit = omit,
-        category: pet_update_params.Category | Omit = omit,
+        category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
         tags: Iterable[pet_update_params.Tag] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
