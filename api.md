@@ -13,6 +13,7 @@ from whatsauto.types import (
     APIResponse,
     Category,
     Pet,
+    Tag,
     PetFindByStatusResponse,
     PetFindByTagsResponse,
 )
