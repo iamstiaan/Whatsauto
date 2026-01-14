@@ -17,7 +17,7 @@ The REST API documentation can be found on [app.stainlessapi.com](https://app.st
 
 ```sh
 # install from PyPI
-pip install --pre whatsauto
+pip install '--pre whatsauto'
 ```
 
 ## Usage
@@ -81,7 +81,7 @@ You can enable this by installing `aiohttp`:
 
 ```sh
 # install from PyPI
-pip install --pre whatsauto[aiohttp]
+pip install '--pre whatsauto[aiohttp]'
 ```
 
 Then you can enable it by instantiating the client with `http_client=DefaultAioHttpClient()`:
