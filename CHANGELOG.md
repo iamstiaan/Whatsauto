@@ -1,5 +1,29 @@
 # Changelog
 
+## 0.1.0-alpha.2 (2026-02-13)
+
+Full Changelog: [v0.1.0-alpha.1...v0.1.0-alpha.2](https://github.com/iamstiaan/Whatsauto/compare/v0.1.0-alpha.1...v0.1.0-alpha.2)
+
+### Features
+
+* **api:** manual updates ([d020e9b](https://github.com/iamstiaan/Whatsauto/commit/d020e9b8e2b2ce4fe8810c4fee6937da4e24ca0a))
+* **api:** manual updates ([fe24a3d](https://github.com/iamstiaan/Whatsauto/commit/fe24a3d3552e082d854516d2db874e21bf7f8a31))
+* **client:** add custom JSON encoder for extended type support ([121300f](https://github.com/iamstiaan/Whatsauto/commit/121300f448d8099c152fc1163ebbd54a6d2d16b1))
+* **client:** add support for binary request streaming ([cfe074a](https://github.com/iamstiaan/Whatsauto/commit/cfe074a9379c1c3c75bb977f829b635b76e120c5))
+
+
+### Chores
+
+* **ci:** upgrade `actions/github-script` ([0703e11](https://github.com/iamstiaan/Whatsauto/commit/0703e11b80fb398158da4c01531b088c406b164a))
+* format all `api.md` files ([39f3682](https://github.com/iamstiaan/Whatsauto/commit/39f36820d992ad94146a0832871072a20c9e8b00))
+* **internal:** add `--fix` argument to lint script ([3007499](https://github.com/iamstiaan/Whatsauto/commit/300749901f0b1b13aa24de4159f8d65f0b5a7e1f))
+* **internal:** bump dependencies ([47abac3](https://github.com/iamstiaan/Whatsauto/commit/47abac384be85a7f8ab8ccf985f1ab21c3f1f555))
+* **internal:** codegen related update ([8b9bbbe](https://github.com/iamstiaan/Whatsauto/commit/8b9bbbe2bdf47008a25d4f864fcf079a49d5e4c8))
+* **internal:** codegen related update ([972081b](https://github.com/iamstiaan/Whatsauto/commit/972081b1be21caf7bcff371f48f31523bcf75c1c))
+* **internal:** fix lint error on Python 3.14 ([b254ab7](https://github.com/iamstiaan/Whatsauto/commit/b254ab7661c7fbd7ae36483ff95cb2da0ed551df))
+* **internal:** update `actions/checkout` version ([ca59855](https://github.com/iamstiaan/Whatsauto/commit/ca59855bc6e239ab7749a7d6eb2226ceb44a0ea5))
+* update SDK settings ([c48bdd9](https://github.com/iamstiaan/Whatsauto/commit/c48bdd9a0c2b2e97844dba671e01628a475bd47e))
+
 ## 0.1.0-alpha.1 (2025-12-18)
 
 Full Changelog: [v0.0.1-alpha.0...v0.1.0-alpha.1](https://github.com/iamstiaan/Whatsauto/compare/v0.0.1-alpha.0...v0.1.0-alpha.1)
