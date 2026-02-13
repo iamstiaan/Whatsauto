@@ -2,6 +2,7 @@
 
 from __future__ import annotations
 
+import os
 from typing import Iterable
 from typing_extensions import Literal
 
@@ -23,8 +24,10 @@ from .._types import (
     Headers,
     NoneType,
     NotGiven,
+    BinaryTypes,
     FileContent,
     SequenceNotStr,
+    AsyncBinaryTypes,
     omit,
     not_given,
 )
@@ -39,7 +42,9 @@ from .._response import (
 )
 from ..types.pet import Pet
 from .._base_client import make_request_options
+from ..types.tag_param import TagParam
 from ..types.api_response import APIResponse
+from ..types.category_param import CategoryParam
 from ..types.pet_find_by_tags_response import PetFindByTagsResponse
 from ..types.pet_find_by_status_response import PetFindByStatusResponse
 
@@ -72,9 +77,9 @@ class PetsResource(SyncAPIResource):
         name: str,
         photo_urls: SequenceNotStr[str],
         id: int | Omit = omit,
-        category: pet_create_params.Category | Omit = omit,
+        category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
-        tags: Iterable[pet_create_params.Tag] | Omit = omit,
+        tags: Iterable[TagParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -152,9 +157,9 @@ class PetsResource(SyncAPIResource):
         name: str,
         photo_urls: SequenceNotStr[str],
         id: int | Omit = omit,
-        category: pet_update_params.Category | Omit = omit,
+        category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
-        tags: Iterable[pet_update_params.Tag] | Omit = omit,
+        tags: Iterable[TagParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -354,7 +359,7 @@ class PetsResource(SyncAPIResource):
     def upload_image(
         self,
         pet_id: int,
-        image: FileContent,
+        image: FileContent | BinaryTypes,
         *,
         additional_metadata: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -381,7 +386,7 @@ class PetsResource(SyncAPIResource):
         extra_headers = {"Content-Type": "application/octet-stream", **(extra_headers or {})}
         return self._post(
             f"/pet/{pet_id}/uploadImage",
-            body=read_file_content(image),
+            content=read_file_content(image) if isinstance(image, os.PathLike) else image,
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,
@@ -421,9 +426,9 @@ class AsyncPetsResource(AsyncAPIResource):
         name: str,
         photo_urls: SequenceNotStr[str],
         id: int | Omit = omit,
-        category: pet_create_params.Category | Omit = omit,
+        category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
-        tags: Iterable[pet_create_params.Tag] | Omit = omit,
+        tags: Iterable[TagParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -501,9 +506,9 @@ class AsyncPetsResource(AsyncAPIResource):
         name: str,
         photo_urls: SequenceNotStr[str],
         id: int | Omit = omit,
-        category: pet_update_params.Category | Omit = omit,
+        category: CategoryParam | Omit = omit,
         status: Literal["available", "pending", "sold"] | Omit = omit,
-        tags: Iterable[pet_update_params.Tag] | Omit = omit,
+        tags: Iterable[TagParam] | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
         # The extra values given here take precedence over values defined on the client or passed to this method.
         extra_headers: Headers | None = None,
@@ -703,7 +708,7 @@ class AsyncPetsResource(AsyncAPIResource):
     async def upload_image(
         self,
         pet_id: int,
-        image: FileContent,
+        image: FileContent | AsyncBinaryTypes,
         *,
         additional_metadata: str | Omit = omit,
         # Use the following arguments if you need to pass additional parameters to the API that aren't available via kwargs.
@@ -730,7 +735,7 @@ class AsyncPetsResource(AsyncAPIResource):
         extra_headers = {"Content-Type": "application/octet-stream", **(extra_headers or {})}
         return await self._post(
             f"/pet/{pet_id}/uploadImage",
-            body=await async_read_file_content(image),
+            content=await async_read_file_content(image) if isinstance(image, os.PathLike) else image,
             options=make_request_options(
                 extra_headers=extra_headers,
                 extra_query=extra_query,

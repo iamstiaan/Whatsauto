@@ -3,10 +3,14 @@
 from __future__ import annotations
 
 from .pet import Pet as Pet
+from .tag import Tag as Tag
 from .user import User as User
 from .shared import Order as Order
+from .category import Category as Category
+from .tag_param import TagParam as TagParam
 from .user_param import UserParam as UserParam
 from .api_response import APIResponse as APIResponse
+from .category_param import CategoryParam as CategoryParam
 from .pet_create_params import PetCreateParams as PetCreateParams
 from .pet_update_params import PetUpdateParams as PetUpdateParams
 from .user_login_params import UserLoginParams as UserLoginParams

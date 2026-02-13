@@ -5,21 +5,11 @@ from typing_extensions import Literal
 
 from pydantic import Field as FieldInfo
 
+from .tag import Tag
 from .._models import BaseModel
+from .category import Category
 
-__all__ = ["Pet", "Category", "Tag"]
-
-
-class Category(BaseModel):
-    id: Optional[int] = None
-
-    name: Optional[str] = None
-
-
-class Tag(BaseModel):
-    id: Optional[int] = None
-
-    name: Optional[str] = None
+__all__ = ["Pet"]
 
 
 class Pet(BaseModel):
